@@ -1,114 +1,15 @@
-baseURL = "https://eri24816.grapycal.com/"
+baseURL = "https://docs.grapycal.com/"
 languageCode = "en-us"
-title = "Eri24816’s Blog"
-theme = "DoIt"
-[params.home.profile]
-  enable = true
-  # Gravatar Email for preferred avatar in home page
-  gravatarEmail = ""
-  # URL of avatar shown in home page
-  avatarURL = "https://cdn.discordapp.com/avatars/364976571192311808/b893a0e5d67d8c12b9e42d364f2a1379.webp?size=128"
-  # URL the avatar links to
-  avatarLinkURL = ""
-  social = true
-  subtitle = "What are machines thinking about?"
-  typeit = true
+title = "Grapycal Docs"
+theme = "lotusdocs"
 
-  
-[menu]
-  [[menu.main]]
-    identifier = "posts"
-    # you can add extra information before the name (HTML format is supported), such as icons
-    pre = ""
-    # you can add extra information after the name (HTML format is supported), such as icons
-    post = ""
-    name = "Posts"
-    url = "/posts/"
-    # title will be shown when you hover on this menu link
-    title = ""
-    weight = 1
-  [[menu.main]]
-    identifier = "tags"
-    pre = ""
-    post = ""
-    name = "Tags"
-    url = "/tags/"
-    title = ""
-    weight = 2
-  [[menu.main]]
-    identifier = "categories"
-    pre = ""
-    post = ""
-    name = "Categories"
-    url = "/categories/"
-    title = ""
-    weight = 3
-
-[params.search]
-    enable = true
-    # type of search engine ("algolia", "fuse")
-    type = "fuse"
-    # max index length of the chunked content
-    contentLength = 4000
-    # placeholder of the search bar
-    placeholder = ""
-    # DoIt NEW | 0.2.1 max number of results length
-    maxResultLength = 10
-    # DoIt NEW | 0.2.3 snippet length of the result
-    snippetLength = 30
-    # DoIt NEW | 0.2.1 HTML tag name of the highlight part in results
-    highlightTag = "em"
-    # DoIt NEW | 0.2.4 whether to use the absolute URL based on the baseURL in search index
-    absoluteURL = false
-    [params.search.algolia]
-      index = ""
-      appID = ""
-      searchKey = ""
-    [params.search.fuse]
-      # DoIt NEW | 0.2.12 https://fusejs.io/api/options.html
-      isCaseSensitive = false
-      minMatchCharLength = 2
-      findAllMatches = false
-      location = 0
-      threshold = 0.3
-      distance = 100
-      ignoreLocation = false
-      useExtendedSearch = false
-      ignoreFieldNorm = false
-
-  [params.header.title]
-    # URL of the LOGO
-    logo = "https://cdn.discordapp.com/avatars/364976571192311808/b893a0e5d67d8c12b9e42d364f2a1379.webp?size=128"
-    # title name
-    name = "Eri24816’s Blog"
-    # you can add extra information before the name (HTML format is supported), such as icons
-    pre = ""
-    # you can add extra information after the name (HTML format is supported), such as icons
-    post = ""
-    # DoIt NEW | 0.2.5 whether to use typeit animation for title name
-    typeit = false
-
-[params.social]
-   GitHub = "eri24816"
-   Instagram = "eri24816"
-   Youtubechannel = "UCuPkbR7LrU9I1onmsYepeUw"
-   Facebook = "100009817681140"
-   Email = "a931eric@gmail.com"
-
-[params.typeit]
-  # typing speed between each step (measured in milliseconds)
-  speed = 80
-  # blinking speed of the cursor (measured in milliseconds)
-  cursorSpeed = 1000
-  # character used for the cursor (HTML format is supported)
-  cursorChar = "|"
-  # cursor duration after typing finishing (measured in milliseconds, "-1" means unlimited)
-  duration = -1
-
-[params.page.toc]
-      # whether to enable the table of the contents
-      enable = true
-      # DoIt NEW | 0.2.9 whether to keep the static table of the contents in front of the post
-      keepStatic = true
-      # whether to make the table of the contents in the sidebar automatically collapsed
-      auto = true
+[module]
+    # uncomment line below for temporary local development of module
+    # or when using a 'theme' as a git submodule
+    replacements = "github.com/colinwilson/lotusdocs -> lotusdocs"
+    [[module.imports]]
+        path = "github.com/colinwilson/lotusdocs"
+        disable = false
+    [[module.imports]]
+        path = "github.com/gohugoio/hugo-mod-bootstrap-scss/v5"
+        disable = false
