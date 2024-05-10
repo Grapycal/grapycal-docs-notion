@@ -1,24 +1,22 @@
-import fs from "fs-extra";
 import {
   Client,
-  isFullPage,
   isFullUser,
-  iteratePaginatedAPI,
-} from "@notionhq/client";
+  iteratePaginatedAPI
+} from "@notionhq/client"
 import {
   EquationBlockObjectResponse,
-  GetPageResponse,
-  PageObjectResponse,
-} from "@notionhq/client/build/src/api-endpoints";
-import { NotionToMarkdown } from "@pclouddev/notion-to-markdown";
-import YAML from "yaml";
-import { sh } from "./sh";
-import { DatabaseMount, loadConfig, PageMount } from "./config";
-import { getPageTitle, getCoverLink, getFileName } from "./helpers";
-import katex from "katex";
-import { MdBlock } from "@pclouddev/notion-to-markdown/build/types";
-import path from "path";
-import { getContentFile } from "./file";
+  PageObjectResponse
+} from "@notionhq/client/build/src/api-endpoints"
+import { NotionToMarkdown } from "@pclouddev/notion-to-markdown"
+import { MdBlock } from "@pclouddev/notion-to-markdown/build/types"
+import fs from "fs-extra"
+import katex from "katex"
+import path from "path"
+import YAML from "yaml"
+import { loadConfig } from "./config"
+import { getContentFile } from "./file"
+import { getCoverLink, getFileName, getPageTitle } from "./helpers"
+import { sh } from "./sh"
 require("katex/contrib/mhchem"); // modify katex module
 
 function getExpiryTime(blocks: MdBlock[], expiry_time: string | undefined = undefined): string | undefined {
@@ -37,6 +35,8 @@ function getExpiryTime(blocks: MdBlock[], expiry_time: string | undefined = unde
   }
   return expiry_time
 }
+
+let runningWeight = 0
 
 export async function renderPage(page: PageObjectResponse, notion: Client) {
 
@@ -110,6 +110,8 @@ export async function renderPage(page: PageObjectResponse, notion: Client) {
       }
     }
   } 
+
+  frontMatter.weight = runningWeight++
 
   // map page properties to front matter
   for (const property in page.properties) {
