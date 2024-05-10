@@ -31,3 +31,21 @@ versions.forEach((version) => {
     require('fs').writeFileSync('hugo.toml', hugoToml);
   execSync(`hugo`);
 });
+
+// build the latest version to latest
+// sort the versions 'v{a}.{b}.{c}' and get the latest
+const data = versions.map((v) => {
+    const [a, b, c] = v.split('.').map((x) => parseInt(x));
+    return { a, b, c, v };
+    }).sort((a, b) => {
+        if (a.a !== b.a) return a.a - b.a;
+        if (a.b !== b.b) return a.b - b.b;
+        return a.c - b.c;
+    }
+);
+const latestVersion = data[data.length - 1].v;
+console.log(`Building version latest (${latestVersion})`);
+const hugoToml = `baseURL = "${baseURLRoot}/latest"\ncontentDir = "content/${latestVersion}"\npublishDir = "public/latest"`;
+require('fs').writeFileSync('hugo.toml', hugoToml);
+execSync(`hugo`);
+ 
