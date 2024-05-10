@@ -36,7 +36,7 @@ function getExpiryTime(blocks: MdBlock[], expiry_time: string | undefined = unde
   return expiry_time
 }
 
-let runningWeight = 0
+let runningWeight = 1
 
 export async function renderPage(page: PageObjectResponse, notion: Client) {
 
