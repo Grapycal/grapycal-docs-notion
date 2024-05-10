@@ -1,4 +1,3 @@
-baseURL = "https://docs.grapycal.com/"
 languageCode = "en-us"
 title = "Grapycal Docs"
 theme = "lotusdocs"
