@@ -10,7 +10,7 @@ we need to iterate over all the versions and build the site for each version usi
 */
 
 // First detect all the versions (dirs in the content directory)
-const { readdirSync } = require('fs');
+const { readdirSync, readFileSync } = require('fs');
 const { execSync } = require('child_process');
 
 const getDirectories = source =>
@@ -24,10 +24,12 @@ const versions = getDirectories('content');
 //const baseURLRoot = 'http://localhost:1313';
 const baseURLRoot = 'https://docs.grapycal.com';
 
+const oldConfig = readFileSync('hugo.toml', 'utf8');
+
 versions.forEach((version) => {
     console.log(`Building version ${version}`);
     // Change the baseURL, contentDir and publishDir in the hugo.toml
-    const hugoToml = `baseURL = "${baseURLRoot}/${version}"\ncontentDir = "content/${version}"\npublishDir = "public/${version}"`;
+    const hugoToml = `baseURL = "${baseURLRoot}/${version}"\ncontentDir = "content/${version}"\npublishDir = "public/${version}"\n`+oldConfig;
     require('fs').writeFileSync('hugo.toml', hugoToml);
   execSync(`hugo`);
 });
@@ -45,7 +47,10 @@ const data = versions.map((v) => {
 );
 const latestVersion = data[data.length - 1].v;
 console.log(`Building version latest (${latestVersion})`);
-const hugoToml = `baseURL = "${baseURLRoot}/latest"\ncontentDir = "content/${latestVersion}"\npublishDir = "public/latest"`;
+const hugoToml = `baseURL = "${baseURLRoot}/latest"\ncontentDir = "content/${latestVersion}"\npublishDir = "public/latest"\n`+oldConfig;
 require('fs').writeFileSync('hugo.toml', hugoToml);
 execSync(`hugo`);
  
+// Restore the original hugo.toml
+require('fs').writeFileSync('hugo.toml', oldConfig);
+
