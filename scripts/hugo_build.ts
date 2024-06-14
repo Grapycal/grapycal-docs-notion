@@ -31,7 +31,7 @@ versions.forEach((version) => {
     // Change the baseURL, contentDir and publishDir in the hugo.toml
     const hugoToml = `baseURL = "${baseURLRoot}/${version}"\ncontentDir = "content/${version}"\npublishDir = "public/${version}"\n`+oldConfig;
     require('fs').writeFileSync('hugo.toml', hugoToml);
-  execSync(`hugo`);
+  execSync(`hugo`,{stdio: 'inherit'});
 });
 
 // build the latest version to latest
