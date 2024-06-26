@@ -39,5 +39,5 @@ export function getFileName(title: string, page_id: string, extension: string='m
 
   return title.replaceAll(" ", "-").replace(/--+/g, "-") +
   "-" +
-  page_id.replaceAll("-", "") + extension;
+  page_id.replaceAll("-", "").slice(0, 6) + extension;
 }
